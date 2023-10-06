@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed = .01f;
+    public bool hasKey = false;
+
+    public GameObject key;
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +45,18 @@ public class PlayerController : MonoBehaviour
             newPosition.x += speed;
         }
 
+
         //update the current position to the new position
         transform.position = newPosition;
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag.Equals("key"))
+        {
+            Debug.Log("obtained key");
+            key.SetActive(false);//key disappears
+            hasKey = true;//the key now
+        }
+
     }
 }
