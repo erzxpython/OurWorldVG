@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,10 +10,19 @@ public class PlayerController : MonoBehaviour
 
     public GameObject key;
 
+    
+    public static PlayerController instance; //creating an object of the class to be findable
+
     // Start is called before the first frame update
     void Start()
     {
-
+        if (instance == null) //check if instance is in the scene
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        GameObject.DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
@@ -58,5 +68,11 @@ public class PlayerController : MonoBehaviour
             hasKey = true;//the key now
         }
 
+        //write code for exiting second scene and go back to first scene
+        if (collision.gameObject.tag.Equals("exit"))
+        {
+            Debug.Log("hit");
+            SceneManager.LoadScene(0);
+        }
     }
 }
