@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (instance == null) //check if instance is in the scene
+        if (instance != null) //check if instance is in the scene
         {
             Destroy(gameObject);
             return;
