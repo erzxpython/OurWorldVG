@@ -61,6 +61,12 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.tag.Equals("door"))
+        {
+            Debug.Log("hit");
+            SceneManager.LoadScene(2); //access SceneManager class for LoadScene function
+        }
+
         if (collision.gameObject.tag.Equals("key"))
         {
             Debug.Log("obtained key");
@@ -72,7 +78,14 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag.Equals("exit"))
         {
             Debug.Log("hit");
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
+        }
+
+        if (collision.gameObject.tag.Equals("end") && hasKey == true) //needs to satisfy both
+                                                                      //conditions to enter the end door
+        {
+            Debug.Log("hit");
+            SceneManager.LoadScene(3);
         }
     }
 }
